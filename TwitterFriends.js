@@ -257,7 +257,7 @@ TwitterFriends.prototype.handleMarkerGroups = function(LatLng, person){
 
     //create single person markup
     var markup = '<div class="single-marker">';
-    markup += '<div class="img-container"><img src="'+person.profile_image_url+'" alt="'+person.screen_name+'" /></div>';
+    markup += '<div class="img-container"><img title="'+ person.name + ' : @' + person.screen_name + '" src="'+person.profile_image_url+'" alt="'+person.screen_name+'" /></div>';
     markup += '</div>';
 
     var marker = new RichMarker({
@@ -300,7 +300,7 @@ TwitterFriends.prototype.resetMarkupAndRefresh = function(locationObj){
         person = locationObj.followers[i];
         top = points[i][0];
         left = points[i][1];
-        markup += '<div style="position:absolute;top:'+top+'px;left:'+left+'px;" class="img-container"><img src="'+person.profile_image_url+'" alt="'+person.screen_name+'" /></div>';
+        markup += '<div style="position:absolute;top:'+top+'px;left:'+left+'px;" class="img-container"><img title="'+ person.name + ' : @' + person.screen_name + '" src="'+person.profile_image_url+'" alt="'+person.screen_name+'" /></div>';
     }
     markup += '</div></div>';
     marker.content = markup;
