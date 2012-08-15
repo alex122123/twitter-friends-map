@@ -44,7 +44,7 @@ TwitterFriends.prototype.constructor = TwitterFriends;
 TwitterFriends.prototype.getTwitterFriendIds = function(sn){
     var url = 'https://api.twitter.com/1/friends/ids.json?cursor=-1&screen_name='+sn+'&callback=twitterFriends.receiveFollowerIds';
     $.ajax({
-        url:url, 
+        url:url,
         dataType:'jsonp',
         error: function(jqXHR, textStatus, errorThrown){
             if(textStatus == 'timeout'){
@@ -82,13 +82,13 @@ TwitterFriends.prototype.receiveFollowerIds = function(data){
  */
 TwitterFriends.prototype.setFollowersMessage = function(f){
     var n = f ? f : this.follows.length;
-    $('.followers').show().html('following '+n+' people.');    
+    $('.followers').show().html('following '+n+' people.');
 };
 
 /*
  * Assemble strings to make AJAX calls against the Twitter API
  * returns Twitter User data to the receiveCallStringResults callback
- * 
+ *
  */
 TwitterFriends.prototype.createUserCallString = function(users){
     //create an array of strings to make separate calls the the twitter JSON API
@@ -112,17 +112,17 @@ TwitterFriends.prototype.createUserCallString = function(users){
 /*
  * Make the AJAX calls
  * returns Twitter User data to the receiveCallStringResults callback
- * 
+ *
  */
 TwitterFriends.prototype.sendCallStrings = function(callStrings){
     for(var i = 0; i < callStrings.length; i++){
-        $.ajax({url:callStrings[i], dataType:'jsonp'});    
+        $.ajax({url:callStrings[i], dataType:'jsonp'});
     }
 };
 
 /*
  * Push all of the User data returned from Twitter into the follows array
- * 
+ *
  */
 TwitterFriends.prototype.receiveCallStringResults = function(data){
     //increment for the number of results we have received
@@ -140,7 +140,7 @@ TwitterFriends.prototype.receiveCallStringResults = function(data){
 /*
  * Utility function for calling the geoCoder and saving the index
  * this should be refactored or renamed at the least
- * 
+ *
  */
 TwitterFriends.prototype.sendGeoCalls = function(){
     for(var i = 0, l = this.follows.length; i < l; i++){
@@ -150,7 +150,7 @@ TwitterFriends.prototype.sendGeoCalls = function(){
 
 /*
  * Create the call AJAX call strings for the Yahoo! Places API
- * 
+ *
  */
 TwitterFriends.prototype.callGeoCoder = function(location, index){
     if(location){
@@ -164,7 +164,7 @@ TwitterFriends.prototype.callGeoCoder = function(location, index){
 /*
  * Finally make calls to the Yahoo! Places API
  * callback sends the Latatitude and Longitude to handleLocations
- * 
+ *
  */
 TwitterFriends.prototype.callGetJson = function(url, location, index){
     this.calledLocations++;
@@ -179,16 +179,16 @@ TwitterFriends.prototype.callGetJson = function(url, location, index){
             var i = index, result;
             response = (typeof response == 'string') ? JSON.parse(response) : response;
             that.receivedLocations++;
-            
+
             if(!response.ResultSet){
                 response = that.xmlToJson(response);
             }
             if(response.ResultSet.Found >= 1){
                 result = response.ResultSet.Results[0];
             } else {
-                return;    
+                return;
             }
-            
+
             var person = that.follows[i];
             var LatLng = new google.maps.LatLng(result.latitude, result.longitude);
             //handle the location information for each person
@@ -243,7 +243,7 @@ TwitterFriends.prototype.xmlToJson = function(xml){
 TwitterFriends.prototype.handleMarkerGroups = function(LatLng, person){
     //each person has a unique location until we check that they don't
     var uniqueLocation = true;
-    
+
     for(var i = 0, l = this.locations.length; i < l; i++){
         //check if the location coming back is equal to any of the locations we have
         if(_.isEqual(LatLng, this.locations[i].latLng)){
@@ -254,21 +254,21 @@ TwitterFriends.prototype.handleMarkerGroups = function(LatLng, person){
             return;
         }
     }
-    
+
     //create single person markup
     var markup = '<div class="single-marker">';
     markup += '<div class="img-container"><img src="'+person.profile_image_url+'" alt="'+person.screen_name+'" /></div>';
     markup += '</div>';
-    
+
     var marker = new RichMarker({
             position: LatLng,
             map: map,
             shadow: '',
             content: markup
     });
-    
+
     this.markers.push(marker);
-    
+
     var locationObject = {
         latLng : LatLng,
         followers : [person],
@@ -288,7 +288,7 @@ TwitterFriends.prototype.resetMarkupAndRefresh = function(locationObj){
         tierCutOff = 15,
         top, left, person, j,
         markup = '<div class="group-marker">'+ '<div class="group-amount" style="margin-left:-'+width+'px;">'+fol+'</div><div class="group-img-wrap">';
-        if(fol < tierCutOff){ 
+        if(fol < tierCutOff){
             points = this.circlePoints(80, fol, 8, 8);
         } else {
             points = this.circlePoints(80, 15, 8, 8);
@@ -315,7 +315,7 @@ TwitterFriends.prototype.resetMarkupAndRefresh = function(locationObj){
                     return node.alt;
                 }
             });
-        });    
+        });
     }
 };
 
@@ -331,15 +331,15 @@ TwitterFriends.prototype.followsLeft = function(){
 TwitterFriends.prototype.circlePoints = function(radius, steps, centerX, centerY){
     var xValues = [], yValues = [], points = [], tmpX, tmpY;
     for (var i = 0; i < steps; i++) {
-        
+
         xValues[i] = (centerX + radius * Math.cos(2 * Math.PI * i / steps));
-        
+
         tmpX = Math.floor(xValues[i]);
-        
+
         yValues[i] = (centerY + radius * Math.sin(2 * Math.PI * i / steps));
-        
+
         tmpY = Math.floor(yValues[i]);
-        
+
         points.push([tmpX, tmpY]);
     }
     return points;
