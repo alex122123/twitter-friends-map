@@ -21,8 +21,25 @@
 		receivedLocations:	0,
 
 		init : function(screenName){
-			this.screenName = screenName;
-			this.getFriendIds(this.screenName);
+			var self = this;
+
+			self.screenName = screenName;
+			
+			self.getFriendIds(this.screenName);
+
+			twttr.anywhere(function (T) {
+				var interval = setInterval(function(){
+					
+					T('.img-container').hovercards({
+						username: function(node) {
+							return node.alt;
+						}
+					});
+					if(this.followsLeft() > 10) {
+						clearInterval(interval);
+					}
+				}, 10000);
+			});
 		},
 
 		/*
@@ -340,17 +357,6 @@
 				marker.content = markup;
 				
 				marker.setMap(gmap);
-				
-				//pyramid of DOOOOM
-				if(this.followsLeft() < 10){
-					twttr.anywhere(function (T) {
-						T('.img-container').hovercards({
-							username: function(node) {
-								return node.alt;
-							}
-						});
-					});
-				}
 			},
 
 			followsLeft: function(){
