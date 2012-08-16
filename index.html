@@ -1,48 +1,37 @@
 <!DOCTYPE html>
-
 <html>
 <head>
-    <!-- I hope you'll ask for a date before you just checkout my source -->
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&sensor=false"></script>
-    <script src="http://platform.twitter.com/anywhere.js?id=OqrtjX10HDPHN4k5OtyAXQ&v=1" type="text/javascript"></script>
-    <script type="text/javascript" src="Richmarker.js"></script>
-    <script type="text/javascript" src="handlebars.js"></script>
-    <link href="style.css" type="text/css" rel="stylesheet" />
-    <style>
-        html, body {
-            margin:0;
-            padding:0;
-            height:100%;
-        }
-        #map_canvas {
-            margin:0;
-            padding:0;
-            width:100%;
-            height:100%;
-        }
-    </style>
+	<link href="assets/css/style.css" type="text/css" rel="stylesheet" />
 </head>
 <html>
 <body>
-    <div id="map_canvas"></div>
-    <div class="twitter-login"></div>
-    <div class="twitter-alert">We hit our Twitter API limit</div>
-	<script type="text/javascript" src="TwitterFriends.js"></script>
-    <script type="text/javascript" src="Underscore.js"></script>
-    <script type="text/javascript" src="app.js"></script>
+	<div id="map-canvas"></div>
+	<div class="twitter-login"></div>
+	<div class="twitter-alert">
+		We hit our Twitter API limit
+	</div>
+
+<script type="text/javascript" src="/assets/js/jquery-180.js"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&sensor=false"></script>
+<script type="text/javascript" src="/assets/js/richmarker.js"></script>
+<script src="http://platform.twitter.com/anywhere.js?id=OqrtjX10HDPHN4k5OtyAXQ&v=1"></script>
+<script type="text/javascript" src="/assets/js/twitter-friends.js"></script>
+<script type="text/javascript" src="/assets/js/lodash.min.js"></script>
+<script type="text/javascript" src="/assets/js/app.js"></script>
+
 <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-29343570-1']);
-  _gaq.push(['_trackPageview']);
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-29343570-1']);
+	_gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
 
 </script>
+
 </body>
 </html>
