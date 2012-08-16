@@ -35,7 +35,7 @@
               return node.alt;
             }
           });
-          if(this.followsLeft() > 10) {
+          if(self.followsLeft() > 10) {
             clearInterval(interval);
           }
         }, 10000);
