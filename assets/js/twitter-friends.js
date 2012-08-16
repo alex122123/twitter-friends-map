@@ -36,14 +36,14 @@
 								'&callback=TF.receiveFollowerIds';
 
 				$.ajax({
-						url:			url,
-						dataType: 'jsonp',
-						timeout:	3000
+					url:			url,
+					dataType: 'jsonp',
+					timeout:	3000
 				})
 				.error(function(jqXHR, textStatus, errorThrown){
-						if(textStatus == 'timeout'){
-								$('.twitter-alert').show();
-						}
+					if(textStatus == 'timeout'){
+						$('.twitter-alert').show();
+					}
 				});
 			},
 
@@ -53,23 +53,23 @@
 			* and send the requests to createUserCallString to be assembled
 			*/
 			receiveFollowerIds: function(data){
-					var chunk = [],
-							chunks = [],
-							ids = data.ids;
-							numIds = data.ids.length;
+				var chunk = [],
+						chunks = [],
+						ids = data.ids;
+						numIds = data.ids.length;
 
-					this.setMessage(numIds);
+				this.setMessage(numIds);
 
-					for(var i = 0, l = numIds; i < l; i++){
-							chunk.push(ids[i]);
-							if(chunk.length === 100){
-									chunks.push(chunk);
-									chunk = [];
-							}
+				for(var i = 0, l = numIds; i < l; i++){
+					chunk.push(ids[i]);
+					if(chunk.length === 100){
+						chunks.push(chunk);
+						chunk = [];
 					}
-					chunks.push(chunk);
+				}
+				chunks.push(chunk);
 
-					this.buildCallString(chunks);
+				this.buildCallString(chunks);
 			},
 
 			/*
@@ -85,25 +85,25 @@
 			* returns Twitter User data to the receiveCallStringResults callback
 			*/
 			buildCallString: function(users){
-					//create an array of strings to make separate calls the the twitter JSON API
-					var calls = [],
-							url = 'https://api.twitter.com/1/users/lookup.json?user_id=',
-							tmp = url;
+				//create an array of strings to make separate calls the the twitter JSON API
+				var calls = [],
+						url = 'https://api.twitter.com/1/users/lookup.json?user_id=',
+						tmp = url;
 
-					for(var i = 0, l = users.length; i < l; i++){
+				for(var i = 0, l = users.length; i < l; i++){
 
-							for(var j = 0, k = users[i].length; j < k; j++){
-									tmp += users[i][j] + ',';
-							}
-
-							tmp = tmp.substring(0, tmp.length - 1);
-							tmp += '&callback=TF.receiveCalls';
-							calls.push(tmp);
-							tmp = url;
+					for(var j = 0, k = users[i].length; j < k; j++){
+						tmp += users[i][j] + ',';
 					}
-					//save the total number of call we make the the Twitter API for later use
-					this.totalCalls = calls.length;
-					this.sendCalls(calls);
+
+					tmp = tmp.substring(0, tmp.length - 1);
+					tmp += '&callback=TF.receiveCalls';
+					calls.push(tmp);
+					tmp = url;
+				}
+				//save the total number of call we make the the Twitter API for later use
+				this.totalCalls = calls.length;
+				this.sendCalls(calls);
 			},
 
 
@@ -130,12 +130,12 @@
 				
 				//push the user data into the follows array
 				for(var i = 0, l = data.length; i < l; i++){
-						this.follows.push(data[i]);
+					this.follows.push(data[i]);
 				}
 				
 				//when we know we have all the data get Geo data for each follower
 				if(this.receivedCalls == this.totalCalls){
-						this.sendGeoCalls();
+					this.sendGeoCalls();
 				}
 			},
 
