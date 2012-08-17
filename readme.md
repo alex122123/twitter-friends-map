@@ -12,7 +12,7 @@ Firefox is located on 'the internet' according to their twitter profile.
 
 So Firefox ends up showing near Africa, probably at 0,0 Lat,Long.
 
-Without a user providing coordinates or much more processing time, say to get the last few tweets for each user and attempt to base a location on whether a tweet has a geolocation attached.
+Without a user providing coordinates or much more processing time, say to get the last few tweets for each user and attempt to base a location on whether a tweet has a geolocation attached, it's not easy to get the correct location.
 
 But... it's fun to see where users are if they actually have provided the correct information, just don't assume it to be correct.
 
