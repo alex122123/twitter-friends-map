@@ -1,5 +1,7 @@
 ##Twitter Friends Map
 
+View [here](http://theron17.github.com/Twitter-Friends-Map)
+
 Fully client-side map that 'attempts' to find where your twitter followers are located.
 
 It uses 'user-provided' location information and then calls a geo-location service to attempt to place the user on a map.
