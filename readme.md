@@ -2,7 +2,7 @@
 
 **This project is no longer viable, due to Twitter's @anywhere library being discontinued**
 
-View [here](http://theron17.github.com/Twitter-Friends-Map)
+View [here](http://aackerman.github.com/twitter-friends-map)
 
 Fully client-side map that 'attempts' to find where your twitter followers are located.
 
